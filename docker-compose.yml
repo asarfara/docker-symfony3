@@ -7,7 +7,7 @@ services:
   symfony:
       build:
           context: .
-          dockerfile: data/Dockerfile
+          dockerfile: .docker/data/Dockerfile
       volumes:
           - ./symfony:/opt/projects/symfony
       image: ali-sarfaraz/docker-test-symfony
@@ -16,7 +16,7 @@ services:
   php:
       build:
           context: .
-          dockerfile: php/Dockerfile
+          dockerfile: .docker/php/Dockerfile
       image: ali-sarfaraz/docker-test-php
       volumes_from:
           - symfony
@@ -25,7 +25,7 @@ services:
   nginx:
       build:
           context: .
-          dockerfile: nginx/Dockerfile
+          dockerfile: .docker/nginx/Dockerfile
       image: ali-sarfaraz/docker-test-nginx
       ports:
           - "80:80"

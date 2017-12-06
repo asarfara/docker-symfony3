@@ -1,17 +1,35 @@
+sudo: required
+dist: trusty
+
+language: php
+php:
+  - 7.1
+
 services:
-- docker
+  - docker
+
 before_install:
-- pip install --user awscli
-- export PATH=$PATH:$HOME/.local/bin
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
+  - composer install
+
 script:
-- eval $(aws ecr get-login --region ap-southeast-2)
-- docker-compose build
-- docker tag ali-sarfaraz/docker-test-symfony:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-symfony:latest
-- docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-symfony:latest
-- docker tag ali-sarfaraz/docker-test-php:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
-- docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
-- docker tag ali-sarfaraz/docker-test-nginx:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
-- docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
+  vendor/bin/simple-phpunit
+
+after_success:
+  - eval $(aws ecr get-login --region ap-southeast-2)
+  - docker-compose build
+
+deploy:
+  - provider: script
+    script: docker/deploy/develop.sh
+    on:
+      branch: develop
+  - provider: script
+    script: docker/deploy/master.sh
+    on:
+      branch: master
+
 env:
   global:
   - secure: ANa8s5k5sS3WbN531xiK8u3yHhVedqv/LQUzxO89SDkhy7J+U96oEJbwZtzHyiicAl3HNimvAL8SuBhc+BBUJiEaJt6af+tP/itnktIgShbDGAb5NCaX0+99r6xVnTMjz/NSYUYAmJQ15SzFoTYAU7l00HV7nbWuRfC3AqG3Geh3i/UuXxvoDJTKgz7rdqFA5vW39+m/V6eg26g5ZrK1htcwQR7qpcBVsC+uNxC3Oi1EOL9ke1/UaX4wmVldkLmEOnHij0tbtgE9q9gNt9Gi3S23xliwS+hmDrSusL8FdXrEb4/YiB0PbhL9rRcO1xxpd4sVvJ0QMBCR4gMfwF832vbIjctA2dhBh8mm2LBLzWf3wCC9hiObrHEAsdv8n+m9bC6B9zdwRCoEiy/hbnC9QNmubVAA4BcKBcRm+e9XU49ts4DIxdlX1/DvldKc3jHa74JbgqH/Es1SSOq5IqhrOMbCuGKJzttgvwms8coB1ngP+NMRkBfUIfaoswlIA+iGGHqgeJ8dJiBhncW8UyI4y6y4eeBMkyGShmCmRaE0YCp3NDF4pbX4LHugzUDL/NeJ77V7GelOwXcTpW9Q5K/k5lSP+gcF5tV48VPVjEu9xmHPDP5W1wOpZTUSwd7nJNwROfCiZkKH8YezU0GfRV3FbVZjPs/9Kk1G1iQkw5/kfdg=
