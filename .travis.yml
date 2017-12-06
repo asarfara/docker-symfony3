@@ -14,7 +14,7 @@ before_install:
   - composer install -d=symfony
 
 script:
-  symfony/vendor/bin/simple-phpunit
+  symfony/vendor/bin/simple-phpunit -c symfony/phpunit.xml.dist
 
 after_success:
   - eval $(aws ecr get-login --region ap-southeast-2)
