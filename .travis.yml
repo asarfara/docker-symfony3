@@ -1,32 +1,17 @@
-sudo: required
-
-language: php
-
 services:
-    - docker
-
-env:
-    global:
-        - DOCKER_VERSION=1.10.1-0~trusty
-        - DOCKER_COMPOSE_VERSION=1.6.0
+  - docker
 
 before_install:
-    # list docker-engine versions
-    - apt-cache madison docker-engine
-
-    # upgrade docker-engine to specific version
-    - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
-
-    # reinstall docker-compose at specific version
-    - sudo rm -f /usr/local/bin/docker-compose
-    - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-    - chmod +x docker-compose
-    - sudo mv docker-compose /usr/local/bin
+  - pip install --user awscli
+  - export PATH=$PATH:$HOME/.local/bin
 
 script:
-    - docker version
-    - docker-compose version
+  - eval $(aws ecr get-login --region ap-southeast-2)
+  - docker-compose build
+  - docker tag org/web:latest 418427960604.dkr.ecr.ap-southeast-2.amazonaws.com/org/web:latest
+  - docker push 418427960604.dkr.ecr.ap-southeast-2.amazonaws.com/org/web:latest
 
-script:
-  - curl http://localhost
-
+env:
+  global:
+  - secure: Zk2rMopNnGD4tKacYBtZOXycM6HAJfPsYVUdmWdeXhF6BrDEt0zIxh9qauB0TNdOKp9+iE6fuRL96CGgsyLSKUd0aCeCOhBCDUPwbJIYMYRqvnxs8K4E3LJIdXoSt4U7jOwHL9Xl7iadDXbHJrFYsVUdAK4vKPplI62nFGDRU2QVt3By5MPMFR8myXbc1K4xgcg9HtlD9o9CSm0ap13fAMYX5MlhpVA1RTeOpNqas4Z3rLk0/D1Ab9nw51xU97zhfgMmgKS39w76DBLnkg1OluyliQMzHQDAC374K8j3ln2+HE+F5jzsCzRZxIf8M+sit1Cc7ON/UJ7Q9OykatHOTHn4WBaCD652QW82s8UHeJg8MXSWjRGzZjVevCxGvI7ol2+CwJdzIVGq6E2C0JUHHjuGMj7e1U19VSbdZqyhCUoFm56TLomnt1PKWLbL9EV0hest7GuH2J2NI5fG1kGMrv+vMt2+9EUv1Ck2iwOTnDd9iXSqKxap4UeZ1t3QvOtbNJpDKy7nT9jhusaL2QVLqHx3PWDHwF9aizQKetJ58Cn7ZXkSa2+bxE5itMkGumi6Qju74cHghx3xCgFPerjPVDyIVHFyIRmWDCKQzwdcYORN1vjjJnRJ45gotRrQ+L5LRHu4GMBvV4QIQwT2hlL205WVvN/gSyqucIj+/kf7KqE=
+  - secure: PGBbrSRb4tT98n8/964vpW6D2+/J8A3MoH8kjfPOmF2n3fWFX7SF42I1Mrpg7sTpHcV4oY+Ge84B/p/WnxR4NGAmPBulFFrEY4iScZXwGLSoEolv3BIJw/uBXkb2/AW7Awfi86qT3BUZNA+qccFFyqwC7ruECpOAFtEXc3ClGEzT7E8R8LCT7/8DiXPzv65efe2kJMV+xbiqAQBts8M0WFPVf8iiPTSSs1c4R/kbB6F3VR0jlImDUkolKnUqOF3+DRH9njM9f6pBDRb/9Gzf+fN9sgWLhLorbAkBGmqDDhgFG77bO2oH6VhJ5zTl4YACqBqsvLci+5TikySNEfbFrfymfpaqKBetsfhooU/v22TVVnECwOO4CuCDPf2aEjRh3s6oB4//iJ7Z1UqkolE1/yJUQOBY2OZulrZhV/7TnDuERWUhYVKHBEvO0wMW+EZ7c21F1gGADSYkXZj5whIFtdGg72+Ge9XJV91TYDl3tBDrlQdeLwEtJLCdQ9pXSwSoegBH5DVn42tSv1/oim1EhKsnUxDCXKUYbHJBm0MEBdrjTc/VwG/9gssBmMEbCYuEDlVz1KTfBCKpIAEAM7oggOT079QFjdpEugaCUD8Rj3UC/qWlzneUU87kAdswod1aYv2BNmOSiiu70hVVf2ZUAihM17i6kwRkPjyplNpdmYc=
