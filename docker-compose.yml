@@ -26,7 +26,7 @@ services:
       build:
           context: .
           dockerfile: nginx/Dockerfile
-      image:docker-test-nginx
+      image: docker-test-nginx
       ports:
           - "80:80"
       links:
