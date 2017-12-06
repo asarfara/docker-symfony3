@@ -1,0 +1,34 @@
+version: '2'
+networks:
+    symfony:
+        driver: 'bridge'
+
+services:
+  symfony:
+      build:
+          context: .
+          dockerfile: data/Dockerfile
+      volumes:
+          - ./symfony:/opt/projects/symfony
+      networks:
+          - symfony
+  php:
+      build:
+          context: .
+          dockerfile: php/Dockerfile
+      volumes_from:
+          - symfony
+      networks:
+          - symfony
+  nginx:
+      build:
+          context: .
+          dockerfile: nginx/Dockerfile
+      ports:
+          - "80:80"
+      links:
+          - php
+      volumes_from:
+          - symfony
+      networks:
+          - symfony
