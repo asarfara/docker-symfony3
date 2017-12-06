@@ -22,11 +22,11 @@ after_success:
 
 deploy:
   - provider: script
-    script: docker/deploy/develop.sh
+    script: .travis/deploy/develop.sh
     on:
       branch: develop
   - provider: script
-    script: docker/deploy/master.sh
+    script: .travis/deploy/master.sh
     on:
       branch: master
 
