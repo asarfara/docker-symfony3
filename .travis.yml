@@ -22,11 +22,11 @@ script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/pro
 
 deploy:
   - provider: script
-    script: chmod +x ./.travis/deploy/develop.sh && /bin/sh ./.travis/deploy/develop.sh
+    script: travis/deploy/develop.sh
     on:
       branch: develop
   - provider: script
-    script: chmod +x ./.travis/deploy/master.sh && /bin/sh ./.travis/deploy/master.sh
+    script: travis/deploy/master.sh
     on:
       branch: master
 
