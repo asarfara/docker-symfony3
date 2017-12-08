@@ -16,8 +16,9 @@ install:
   - composer install --no-interaction -d=symfony
   - docker-compose build
   - docker-compose up -d
+  - docker ps
 
-script: docker exec --privileged dockertest_php_1 /opt/projects/docker-test/vendor/bin/simple-phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
 
 deploy:
   - provider: script

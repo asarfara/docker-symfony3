@@ -9,6 +9,7 @@ services:
           context: .
           dockerfile: .docker/php/Dockerfile
       image: ali-sarfaraz/docker-test-php
+      container_name: php
       networks:
           - symfony
   web:
@@ -16,6 +17,7 @@ services:
           context: .
           dockerfile: .docker/web/Dockerfile
       image: ali-sarfaraz/docker-test-nginx
+      container_name: web
       ports:
           - "80:80"
       links:
