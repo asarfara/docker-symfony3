@@ -21,11 +21,10 @@ install:
 script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
 
 after_success:
-    script:
-    - docker tag ali-sarfaraz/docker-test-php:develop 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:develop
-    - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:develop
-    - docker tag ali-sarfaraz/docker-test-nginx:develop 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:develop
-    - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:develop
+  - docker tag ali-sarfaraz/docker-test-php:develop 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:develop
+  - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:develop
+  - docker tag ali-sarfaraz/docker-test-nginx:develop 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:develop
+  - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:develop
 
 env:
   global:
