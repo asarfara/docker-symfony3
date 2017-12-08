@@ -4,34 +4,21 @@ networks:
         driver: 'bridge'
 
 services:
-  symfony:
-      build:
-          context: .
-          dockerfile: .docker/data/Dockerfile
-      volumes:
-          - ./symfony:/opt/projects/symfony
-      image: ali-sarfaraz/docker-test-symfony
-      networks:
-          - symfony
   php:
       build:
           context: .
           dockerfile: .docker/php/Dockerfile
       image: ali-sarfaraz/docker-test-php
-      volumes_from:
-          - symfony
       networks:
           - symfony
-  nginx:
+  web:
       build:
           context: .
-          dockerfile: .docker/nginx/Dockerfile
+          dockerfile: .docker/web/Dockerfile
       image: ali-sarfaraz/docker-test-nginx
       ports:
           - "80:80"
       links:
           - php
-      volumes_from:
-          - symfony
       networks:
           - symfony
