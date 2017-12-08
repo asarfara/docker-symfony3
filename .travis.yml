@@ -8,10 +8,6 @@ php:
 services:
   - docker
 
-before_install:
-  - pip install --user awscli
-  - export PATH=$PATH:$HOME/.local/bin
-
 install:
   - composer install --no-interaction -d=symfony
   - docker-compose build
@@ -21,6 +17,9 @@ install:
 script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
 
 after_success:
+  - pip install --user awscli
+  - export PATH=$PATH:/$HOME/.local/bin
+  - eval $(aws ecr get-login --ap-southeast-2)
   - docker tag ali-sarfaraz/docker-test-php:develop 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:develop
   - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:develop
   - docker tag ali-sarfaraz/docker-test-nginx:develop 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:develop
