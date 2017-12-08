@@ -20,15 +20,8 @@ install:
 
 script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
 
-deploy:
-  - provider: script
-    script: travis/deploy/develop.sh
-    on:
-      branch: develop
-  - provider: script
-    script: travis/deploy/master.sh
-    on:
-      branch: master
+after_success:
+    script: .travis/deploy/develop.sh
 
 env:
   global:
