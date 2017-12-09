@@ -17,7 +17,7 @@ install:
 script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
 
 after_success:
-- .travis/docker_push.sh
+- ./deploy/docker_push.sh
 
 env:
   global:
