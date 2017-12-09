@@ -1,25 +1,36 @@
-sudo: required
-dist: trusty
-language: php
-php:
-- 7.1
-services:
-- docker
-install:
-- composer install --no-interaction -d=symfony
-- docker-compose build
-- docker-compose up -d
-- docker ps
-script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
-after_success:
-- pip install --user awscli
-- export PATH=$PATH:/$HOME/.local/bin
 - eval $(aws ecr get-login --region ap-southeast-2)
 - docker tag ali-sarfaraz/docker-test-php:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
 - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
 - docker tag ali-sarfaraz/docker-test-nginx:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
 - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
+
+
+sudo: required
+dist: trusty
+language: php
+
+php:
+- 7.1
+
+services:
+- docker
+
+install:
+- composer install --no-interaction -d=symfony
+- docker-compose build
+- docker-compose up -d
+- docker ps
+
+script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+
+after_success:
+- ./.travis/docker_push
+
 env:
   global:
   - secure: W7GGu1Kqq4ehsH0x1pQfm+Bk4SRS+PXb28JxXFt7F9ooBZafA9eU2XfokjajuX+3aRRdYgqohaQAbpxsVHLr0BLe35wqZ0xRapi+5/V4tNpoD3r80kIH+hh9RScF5lxO9NyTk5UFTD+CYl7jKWW3/6JbrFr2U0Cmi6jAF8IdsWyqCrY9FGAuJ0THFOdpPIr60oGa/mRSsTpd7Rd9h3jVDlhyiCN/iFayqO1M51Ryqb3n90nDY5uGgRAnfG71WYtYphRNZx5nV2xGC/VwWTdFFvosPy+OvSRZmjaQmTFl7O/FbWftePxZ+WLtyhlLB+3nuoWGofZf4OKLeqGszPne74kfYp/j/hjyGNEpPKZGxWMSEArqGVvw4MKTKKMdFgxQrrfA1CDqE9nnYVFrXFQvIfuBTTb0cHG9HwQqf8us+tjyfGwoHr00x6umZsgONUoB5/iC5yKXGlXJ99ijj16UaYhJA28ga6GcG2ZmnVIapj/ffXl9H9jDXUnazQeZbJevN/UpEUqSN3wEyZHxnoTpfE8STEMt306MM3KivcJ+3k7LWqRC68CwQLItgLPVpKVR1J6vXad83icxv8JPkuWqdcnsndtBcHVVLyXluQF3i9nSD8FSEnI5Gm+eju9r9Saqk5WjoxgBKYOWgvMMlzK3NklQ7PCmeb0YGHNYiSAqh+4=
   - secure: TWssBN5mT91LACeMtC9jiF4OUS0lNWuow1vupSYLU4peWb2MDxlJciOyzpTHfBp2+TiseLNAGZezgMXDd4U/SBA9FgAhqKNRjoQkIssfMIpqGXcovkNBntqBd2N0GDo4ozRAo2Ni4ESbmdyvZYttH6fJwuMO27b3evMbm/uYgG+Ok663YLltBi+w3LPgRePPveTGnScVraPZEEiNm7pNdAWI64LEUXNOavnUE61W3MMM9yYHRz0GpI0Wye9ViFuj0YI/9ZdYD1PzhKjtAoQQDJ4Ml67rHYToCmfUWnP8ke44zR+siY8bEol8us6UxP1xr1MqMpgatlkvS54mxsDsc0UwtlITmySEqLxxPiSwpOcmtsFs9c9AvjzyxgUgVrLz9yEPbzWiDXEEovW04qq9EQzLpasWh+qN7xYFsE9yR83vfVlesmUOcLWRwwV09cItpYZWKHVdHOTMg7/4bE5yG4A/B6KE6vwWVqWUnKICKbNE/bjiheVYV7tQcqCKaH7Bgpwzrs1TJl4QrFL3F+x7WJFpu5+dNZvRepVFXVPK+WnK6NsU2kkdBFjigZELcNcfkzvliBc6Uv4cevBvRjq0FwPOPyvAmC+t9bucol9D4b9BozGR2AMLM3L+JesTBumoA47R4xLE01Odqb6niFURUVTNji1wBNS1TqHx3Cin76k=
+  - REMOTE_IMAGE_URL=550760950390.dkr.ecr.ap-southeast-2.amazonaws.com
+  - PHP_IMAGE_NAME=ali-sarfaraz/docker-test-php
+  - WEB_IMAGE_NAME=ali-sarfaraz/docker-test-nginx
+  - AWS_DEFAULT_REGION=ap-southeast-2
