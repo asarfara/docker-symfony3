@@ -1,31 +1,25 @@
 sudo: required
 dist: trusty
-
 language: php
 php:
-  - 7.1
-
+- 7.1
 services:
-  - docker
-
+- docker
 install:
-  - composer install --no-interaction -d=symfony
-  - docker-compose build
-  - docker-compose up -d
-  - docker ps
-
+- composer install --no-interaction -d=symfony
+- docker-compose build
+- docker-compose up -d
+- docker ps
 script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
-
 after_success:
-  - pip install --user awscli
-  - export PATH=$PATH:/$HOME/.local/bin
-  - eval $(aws ecr get-login --region ap-southeast-2)
-  - docker tag ali-sarfaraz/docker-test-php:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
-  - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
-  - docker tag ali-sarfaraz/docker-test-nginx:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
-  - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
-
+- pip install --user awscli
+- export PATH=$PATH:/$HOME/.local/bin
+- eval $(aws ecr get-login --region ap-southeast-2)
+- docker tag ali-sarfaraz/docker-test-php:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
+- docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
+- docker tag ali-sarfaraz/docker-test-nginx:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
+- docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
 env:
   global:
-  - secure: Fyy4A8hOpeIWlF3+nkMnDvINsiNJLbLpelqmVirjR5RcLnRAs7HowkJpCdxowFMkqAx1LhBl+N0MsZGmpHfGU7FUL4oj0QoutnWczmwfGWAf7w2Eo2zsAWCsTvQ8b84dcJjnxQXY1tadzW0CLxCwDqaAUtSUeb/Y/jZDbPSUtaGxWasXD1yreMeJ4tS1Vn3w6qZUv6IKuOSAq39faFClUBbcRoRAI7DV0bvEHPIBadeeShikna68/15fEm+v05TeteWF6z/cvrmFfq4zEkv3iH5ApVp9Ti9bMlsizFcxHbGXbA4cFx/8yGg8OpsKExo/fcwjPTDI5mmpKAz83rBm1SameeVBVt/lJjuWoUSMLzJ+5sVwGJP9VJO2Au0FX5SH+NHQ/xJu/kJ3e/rPhchpmEODGcElEyImW+tV46sLydi9SeA1E2gd24bb0YLdKgaLNWEbpGTRfxL/OQavLlGdgBY9qhupj8SZW6ZF3BNn0gtjtSwQ+lRHC7ex7HaFfsMiI8iaqXDDW3/z4sWtbzaapF2n/XqigCRRhYCfAds45B3yxKiIDBOcy2scR7hNdQIEtxZ8G5bo0UGkmM5bq7Ajy7RTR/Ip1wkuh2+jSrd/KUDY40+uZ1r2XCl6Pxt28MvexYIcdSmnnHjKYDB+NtwkNqakCYtCgOWB88QHVwm8p6s=
-  - secure: NpLhsMBF1paZ1Qm3f713VYPAexNuLzYNL7cbcwkaGWsKzoksZ1t/Tmb7tTHB2O0i0/lb/YFCbZa3v60UqYUbRfKmIQ/cCBWoFF86LvH2+CuVouaInQBayD2xRlwu0Td7aEdz24sMvAFQm4m1SvQWm/WQGHekoUjVFWkedsS+3rC/4uSp24PC3mEor8+XgudYuFYsbpjXFBxDHUCGYG2UYywa+IbhEcJukAS+wi6CbydpH8Zu3+FeeFbd0GREW7kF2L4EQ0M9jZUB+W3s7QSlAsm+j66STdIP910CBX8BExejHA9SuSs5tS4cYsMSYEEap1aQIEobc1GByXOuX9Hwi6+nZ6SliKeS6KuvGJfvFcE4i7auGIflesEdyhKEQvepNKhovrIYJb9vvQv5JSIhvf2hSe7Zg/9QDVv4ORsKicjzPztnBPOzY/R9p7LmnDPi2Fr5id7kBSM5ks4q7C+mu8SReP0B3aBoskJgIEtZmq5RzN5spNWyNTUjOJZUASqBlH3qjKN/t2AEEVrhT3Ldtd5XnxHUiacK4UBi1fjunfKufwWhYCc6QHKzSZc54U+jYDBAB94S9Bh56XKuQdu/85STbRXuIhglJXMC2v355FGgClq8taII3KDNflmVFAPjwC6O8sLjEZavtC6+re4up8NfvzxS2iAJf2x48Umg1PU=
+  - secure: W7GGu1Kqq4ehsH0x1pQfm+Bk4SRS+PXb28JxXFt7F9ooBZafA9eU2XfokjajuX+3aRRdYgqohaQAbpxsVHLr0BLe35wqZ0xRapi+5/V4tNpoD3r80kIH+hh9RScF5lxO9NyTk5UFTD+CYl7jKWW3/6JbrFr2U0Cmi6jAF8IdsWyqCrY9FGAuJ0THFOdpPIr60oGa/mRSsTpd7Rd9h3jVDlhyiCN/iFayqO1M51Ryqb3n90nDY5uGgRAnfG71WYtYphRNZx5nV2xGC/VwWTdFFvosPy+OvSRZmjaQmTFl7O/FbWftePxZ+WLtyhlLB+3nuoWGofZf4OKLeqGszPne74kfYp/j/hjyGNEpPKZGxWMSEArqGVvw4MKTKKMdFgxQrrfA1CDqE9nnYVFrXFQvIfuBTTb0cHG9HwQqf8us+tjyfGwoHr00x6umZsgONUoB5/iC5yKXGlXJ99ijj16UaYhJA28ga6GcG2ZmnVIapj/ffXl9H9jDXUnazQeZbJevN/UpEUqSN3wEyZHxnoTpfE8STEMt306MM3KivcJ+3k7LWqRC68CwQLItgLPVpKVR1J6vXad83icxv8JPkuWqdcnsndtBcHVVLyXluQF3i9nSD8FSEnI5Gm+eju9r9Saqk5WjoxgBKYOWgvMMlzK3NklQ7PCmeb0YGHNYiSAqh+4=
+  - secure: TWssBN5mT91LACeMtC9jiF4OUS0lNWuow1vupSYLU4peWb2MDxlJciOyzpTHfBp2+TiseLNAGZezgMXDd4U/SBA9FgAhqKNRjoQkIssfMIpqGXcovkNBntqBd2N0GDo4ozRAo2Ni4ESbmdyvZYttH6fJwuMO27b3evMbm/uYgG+Ok663YLltBi+w3LPgRePPveTGnScVraPZEEiNm7pNdAWI64LEUXNOavnUE61W3MMM9yYHRz0GpI0Wye9ViFuj0YI/9ZdYD1PzhKjtAoQQDJ4Ml67rHYToCmfUWnP8ke44zR+siY8bEol8us6UxP1xr1MqMpgatlkvS54mxsDsc0UwtlITmySEqLxxPiSwpOcmtsFs9c9AvjzyxgUgVrLz9yEPbzWiDXEEovW04qq9EQzLpasWh+qN7xYFsE9yR83vfVlesmUOcLWRwwV09cItpYZWKHVdHOTMg7/4bE5yG4A/B6KE6vwWVqWUnKICKbNE/bjiheVYV7tQcqCKaH7Bgpwzrs1TJl4QrFL3F+x7WJFpu5+dNZvRepVFXVPK+WnK6NsU2kkdBFjigZELcNcfkzvliBc6Uv4cevBvRjq0FwPOPyvAmC+t9bucol9D4b9BozGR2AMLM3L+JesTBumoA47R4xLE01Odqb6niFURUVTNji1wBNS1TqHx3Cin76k=
