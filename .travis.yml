@@ -10,11 +10,11 @@ services:
 
 install:
 - composer install --no-interaction -d=symfony
-#- docker-compose build
-#- docker-compose up -d
-#- docker ps
-#
-#script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+- docker-compose build
+- docker-compose up -d
+- docker ps
+
+script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
 
 after_success:
 - ./deploy/docker_push.sh
