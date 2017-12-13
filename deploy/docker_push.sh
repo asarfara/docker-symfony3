@@ -8,7 +8,7 @@ if [ -z "$TRAVIS_PULL_REQUEST" ] || [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     # Change it accordingly to your docker repo
     pip install --user awscli
     export PATH=$PATH:$HOME/.local/bin
-    eval $(aws ecr get-login --region $AWS_DEFAULT_REGION | sed 's|https://||')
+    eval $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION | sed 's|https://||')
 
     # Build and push
     docker build -t $PHP_IMAGE_NAME -f .docker/php/Dockerfile .
