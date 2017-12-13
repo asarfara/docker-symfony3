@@ -24,6 +24,8 @@ after_success:
 - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
 - docker tag ali-sarfaraz/docker-test-nginx:latest 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
 - docker push 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
+- ./bin/ecs-deploy -c docker-symfony-test -n docker-symfony-test -i 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest
+- ./bin/ecs-deploy -c docker-symfony-test -n docker-symfony-test -i 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest
 
 env:
   global:
