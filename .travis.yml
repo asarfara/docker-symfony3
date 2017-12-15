@@ -29,4 +29,4 @@ env:
   - REMOTE_IMAGE_URL: 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com
   - AWS_DEFAULT_REGION: ap-southeast-2
   - TASK_DEFINITION: docker-symfony-test
-  - SERVICE: docker-symfony-test
+  - SERVICE: docker-test-symfony
