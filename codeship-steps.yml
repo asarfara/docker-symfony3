@@ -1,11 +1,3 @@
-- type: parallel
-  name: example_parallel_step
-  steps:
-    - service: php
-      command: printenv
-    - service: web
-      command: ls
-- name: example_tagged_step
-  tag: master
-  service: codeship_example
-  command: echo "Deploy here!"
+- name: tests
+  service: php
+  command: php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
