@@ -1,3 +1,0 @@
-- name: PHP Unit Tests
-  service: php
-  command: php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
