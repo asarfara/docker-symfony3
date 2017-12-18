@@ -1,3 +1,6 @@
-- name: tests
+- name: Composer Install
   service: php
-  command: composer install --no-interaction -d=/opt/projects/docker-test && php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+  command: composer install --no-interaction -d=/opt/projects/docker-test
+- name: PHP Unit Tests
+  service: php
+  command: php /opt/projects/docker-test/vendor/bin/phpu
