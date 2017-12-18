@@ -3,4 +3,4 @@
   command: composer install --no-interaction -d=/opt/projects/docker-test
 - name: PHP Unit Tests
   service: php
-  command: /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+  command: ls -al /opt/projects/docker-test && php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
