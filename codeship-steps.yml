@@ -1,3 +1,3 @@
 - name: tests
   service: php
-  command: ls -al /opt/projects/docker-test && composer install --no-interaction -d=/opt/projects/docker-test/symfony && php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+  command: composer install --no-interaction -d=/opt/projects/docker-test && php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
