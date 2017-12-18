@@ -1,3 +1,3 @@
 - name: tests
   service: php
-  command: php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+  command: ls -al /opt/projects/docker-test/ && /opt/projects/docker-test/vendor/ && php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
