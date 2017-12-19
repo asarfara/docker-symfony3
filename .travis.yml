@@ -16,7 +16,7 @@ install:
 
 script:
 - symfony/vendor/bin/phpunit -c symfony/phpunit.xml.dist
--symfony/vendor/bin/behat -c symfony/tests/integration/behat.yml
+- symfony/vendor/bin/behat -c symfony/tests/integration/behat.yml
 
 after_success:
 - ./deploy/docker_push.sh
