@@ -1,3 +1,0 @@
-- name: compile
-  service: php
-  command: composer install --no-interaction -d /opt/projects/docker-test
