@@ -1,0 +1,14 @@
+web:
+  build:
+    context: .
+    dockerfile: .docker/web/Dockerfile
+  container_name: web
+  ports:
+    - "80:80"
+  links:
+    - php
+php:
+  build:
+    context: .
+    dockerfile: .docker/php/Dockerfile
+  container_name: php
