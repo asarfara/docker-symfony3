@@ -14,11 +14,12 @@ install:
 - docker-compose up -d
 - docker ps
 
-script: docker exec php /opt/projects/docker-test/vendor/bin/phpunit -c /opt/projects/docker-test/phpunit.xml.dist
+script: symfony/vendor/bin/phpunit -c symfony/phpunit.xml.dist
+script: symfony/vendor/bin/behat -c symfony/tests/integration/behat.yml
 
 after_success:
 - ./deploy/docker_push.sh
-- ./deploy/ecs_deploy.sh
+- ./deploy/ecs_push.sh
 
 env:
   global:
@@ -28,5 +29,5 @@ env:
   - WEB_IMAGE_NAME: ali-sarfaraz/docker-test-nginx
   - REMOTE_IMAGE_URL: 550760950390.dkr.ecr.ap-southeast-2.amazonaws.com
   - AWS_DEFAULT_REGION: ap-southeast-2
-  - TASK_DEFINITION: docker-symfony-test
+  - CLUSTER: docker-test-symfony
   - SERVICE: docker-symfony-test
