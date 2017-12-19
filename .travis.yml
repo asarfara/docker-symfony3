@@ -13,11 +13,13 @@ stages:
   - name: deploy
     if: branch = develop
 
+install:
+- composer install --no-interaction -d=symfony
+
 jobs:
   include:
     - stage: test
       script:
-      - composer install --no-interaction -d=symfony
       - docker-compose build
       - docker-compose up -d
       - symfony/vendor/bin/phpunit -c symfony/phpunit.xml.dist
