@@ -8,15 +8,12 @@ php:
 services:
 - docker
 
-install:
-- composer install --no-interaction -d=symfony
-- docker-compose build
-- docker-compose up -d
-- docker ps
-
 jobs:
   include:
     - stage: test
+      script: composer install --no-interaction -d=symfony
+      script: docker-compose build
+      script: docker-compose up -d
       script: symfony/vendor/bin/phpunit -c symfony/phpunit.xml.dist
       script: symfony/vendor/bin/behat -c symfony/tests/integration/behat.yml
     - stage: deploy
