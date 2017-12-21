@@ -15,7 +15,6 @@ class DefaultController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        print_r($em);
 
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
