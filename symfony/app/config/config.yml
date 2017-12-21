@@ -42,11 +42,11 @@ twig:
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: '%database_host%'
-        port: '%database_port%'
-        dbname: '%database_name%'
-        user: '%database_user%'
-        password: '%database_password%'
+        host:     docker-symfony-test.cl0ms7kqptss.ap-southeast-2.rds.amazonaws.com
+        port:     3306
+        dbname:   dockersymfony
+        user:     dockersymfony
+        password: dockersymfony
         charset: UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
