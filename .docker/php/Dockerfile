@@ -3,7 +3,7 @@ FROM php:7.1-fpm
 COPY symfony /opt/projects/docker-test
 
 RUN apt-get update && \
-    apt-get -y install libzip-dev git zip && \
+    apt-get -y install libzip-dev git zip mysql && \
     docker-php-ext-install zip sockets pdo pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
