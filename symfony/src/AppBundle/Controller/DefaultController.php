@@ -16,6 +16,16 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
+        $query = "show databases";
+
+        $statement = $em->getConnection()->prepare($query);
+
+        $statement->execute();
+
+        $resultDatabase1 = $statement->fetchAll();
+
+        print_r($resultDatabase1); die();
+
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
