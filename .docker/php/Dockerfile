@@ -4,7 +4,7 @@ COPY symfony /opt/projects/docker-test
 
 RUN apt-get update && \
     apt-get -y install libzip-dev git zip && \
-    docker-php-ext-install zip
+    docker-php-ext-install zip sockets pdo pdo_mysql
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
