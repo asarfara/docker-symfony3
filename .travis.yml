@@ -15,7 +15,7 @@ install:
 - docker ps
 
 script:
-#- symfony/vendor/bin/phpunit -c symfony/phpunit.xml.dist
+- symfony/vendor/bin/phpunit -c symfony/phpunit.xml.dist
 #- symfony/vendor/bin/behat -c symfony/tests/integration/behat.yml
 
 after_success:
