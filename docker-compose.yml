@@ -8,19 +8,33 @@ services:
       build:
           context: .
           dockerfile: .docker/php/Dockerfile
-      image: ali-sarfaraz/docker-test-php
+      volumes:
+          - ./symfony:/opt/projects/docker-test
       container_name: php
+      networks:
+          - symfony
+  mysql:
+      build:
+          context: .
+          dockerfile: .docker/mysql/Dockerfile
+      container_name: mysql
+      environment:
+          MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      ports:
+          - "3306:3306"
       networks:
           - symfony
   web:
       build:
           context: .
           dockerfile: .docker/web/Dockerfile
-      image: ali-sarfaraz/docker-test-nginx
+      volumes:
+          - ./symfony:/opt/projects/docker-test
       container_name: web
       ports:
           - "80:80"
       links:
           - php
+          - mysql
       networks:
           - symfony

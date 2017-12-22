@@ -39,3 +39,11 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
+
+parameters:
+    # database details
+    database_host:     mysql
+    database_port:     3306
+    database_name:     dockersymfony
+    database_user:     root
+    database_password: ''

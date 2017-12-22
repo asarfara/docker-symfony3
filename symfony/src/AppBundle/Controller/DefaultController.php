@@ -16,7 +16,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $query = "show databases";
+        $query = "select * from Persons";
 
         $statement = $em->getConnection()->prepare($query);
 
