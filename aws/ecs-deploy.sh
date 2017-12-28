@@ -40,6 +40,7 @@ function checkRequiredVariables() {
 }
 
 function registerTaskDefinition() {
+    echo "Registering revision for task definition based on aws/taskDefinition.json";
     $AWS_ECS register-task-definition --cli-input-json taskDefinition.json
 }
 
@@ -47,6 +48,7 @@ function registerTaskDefinition() {
 require aws
 
 checkRequiredVariables
+registerTaskDefinition
 
 
 
