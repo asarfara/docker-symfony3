@@ -9,6 +9,7 @@ services:
 - docker
 
 install:
+- composer install -d symfony
 - docker-compose build
 - docker-compose up -d
 - docker ps
