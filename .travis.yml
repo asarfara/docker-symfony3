@@ -19,7 +19,7 @@ script:
 #- symfony/vendor/bin/behat -c symfony/tests/integration/behat.yml
 
 after_success:
-#- ./deploy/docker_push.sh
+- ./deploy/docker_push.sh
 - ./deploy/ecs_push.sh
 
 env:

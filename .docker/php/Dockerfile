@@ -8,8 +8,6 @@ RUN apt-get update && \
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-RUN composer install -d /opt/projects/docker-test/
-
 # Permission fix
 RUN chmod -R 755 /opt
 
