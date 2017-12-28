@@ -17,13 +17,11 @@ services:
       build:
           context: .
           dockerfile: .docker/mysql/Dockerfile
-      container_name: mysql
-      volumes:
-          - ./.docker/mysql/init:/docker-entrypoint-initdb.d
+      container_name: db
       environment:
           MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       ports:
-          - "3306:3306"
+          - "3305:3306"
       networks:
           - symfony
   web:
