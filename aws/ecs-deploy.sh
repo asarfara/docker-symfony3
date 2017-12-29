@@ -41,7 +41,7 @@ function checkRequiredVariables() {
 
 function registerTaskDefinition() {
     echo "Registering revision for task definition based on aws/taskDefinition.json";
-    $AWS_ECS register-task-definition --cli-input-json $TRAVIS_BUILD_DIR/aws/taskDefinition.json
+    $AWS_ECS register-task-definition --cli-input-json file://$TRAVIS_BUILD_DIR/aws/taskDefinition.json
 }
 
 # Check for AWS, AWS Command Line Interface
