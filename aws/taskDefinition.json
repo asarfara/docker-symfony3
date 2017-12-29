@@ -1,10 +1,6 @@
 {
-  "executionRoleArn": null,
   "containerDefinitions": [
     {
-      "dnsSearchDomains": null,
-      "logConfiguration": null,
-      "entryPoint": null,
       "portMappings": [
         {
           "hostPort": 0,
@@ -12,34 +8,16 @@
           "containerPort": 9000
         }
       ],
-      "command": null,
-      "linuxParameters": null,
       "cpu": 0,
       "environment": [],
-      "ulimits": null,
-      "dnsServers": null,
       "mountPoints": [],
-      "workingDirectory": null,
-      "dockerSecurityOptions": null,
       "memory": 128,
-      "memoryReservation": null,
       "volumesFrom": [],
       "image": "550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-php:latest",
-      "disableNetworking": null,
       "essential": true,
-      "links": null,
-      "hostname": null,
-      "extraHosts": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "privileged": null,
       "name": "php"
     },
     {
-      "dnsSearchDomains": null,
-      "logConfiguration": null,
-      "entryPoint": null,
       "portMappings": [
         {
           "hostPort": 80,
@@ -47,39 +25,21 @@
           "containerPort": 80
         }
       ],
-      "command": null,
-      "linuxParameters": null,
       "cpu": 0,
       "environment": [],
-      "ulimits": null,
-      "dnsServers": null,
       "mountPoints": [],
-      "workingDirectory": null,
-      "dockerSecurityOptions": null,
       "memory": 128,
-      "memoryReservation": null,
       "volumesFrom": [],
       "image": "550760950390.dkr.ecr.ap-southeast-2.amazonaws.com/ali-sarfaraz/docker-test-nginx:latest",
-      "disableNetworking": null,
       "essential": true,
       "links": [
         "php"
       ],
-      "hostname": null,
-      "extraHosts": null,
-      "user": null,
-      "readonlyRootFilesystem": null,
-      "dockerLabels": null,
-      "privileged": null,
       "name": "web"
     }
   ],
-  "memory": null,
   "taskRoleArn": "",
   "family": "docker-symfony-test",
-  "requiresCompatibilities": null,
-  "networkMode": null,
-  "cpu": null,
   "volumes": [],
   "placementConstraints": []
 }
