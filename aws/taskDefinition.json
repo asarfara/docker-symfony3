@@ -74,26 +74,12 @@
       "name": "web"
     }
   ],
-  "placementConstraints": [],
   "memory": null,
-  "taskRoleArn": null,
-  "compatibilities": [
-    "EC2"
-  ],
-  "taskDefinitionArn": "arn:aws:ecs:ap-southeast-2:550760950390:task-definition/docker-symfony-test:22",
+  "taskRoleArn": "",
   "family": "docker-symfony-test",
-  "requiresAttributes": [
-    {
-      "targetId": null,
-      "targetType": null,
-      "value": null,
-      "name": "com.amazonaws.ecs.capability.ecr-auth"
-    }
-  ],
   "requiresCompatibilities": null,
   "networkMode": null,
   "cpu": null,
-  "revision": 22,
-  "status": "ACTIVE",
-  "volumes": []
+  "volumes": [],
+  "placementConstraints": []
 }
