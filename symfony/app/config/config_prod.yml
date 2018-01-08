@@ -25,6 +25,6 @@ parameters:
     # database details
     database_host:     dockersymfony.cluster-cl0ms7kqptss.ap-southeast-2.rds.amazonaws.com
     database_port:     3306
-    dbname:            dockersymfony
     database_name:     dockersymfony
+    database_user:     dockersymfony
     database_password: dockersymfony

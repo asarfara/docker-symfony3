@@ -9,7 +9,7 @@ services:
 - docker
 
 install:
-- composer install -d symfony
+- composer install -o --no-interaction --no-dev -d symfony
 - docker-compose build
 - docker-compose up -d
 - docker ps
@@ -32,3 +32,4 @@ env:
   - AWS_DEFAULT_REGION: ap-southeast-2
   - CLUSTER: docker-test-symfony
   - SERVICE: docker-symfony-test
+  - SYMFONY_ENV: prod
