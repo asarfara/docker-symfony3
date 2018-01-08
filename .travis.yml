@@ -9,7 +9,7 @@ services:
 - docker
 
 install:
-- composer install -o --no-interaction --no-dev -d symfony
+- composer install -d symfony
 - docker-compose build
 - docker-compose up -d
 - docker ps
