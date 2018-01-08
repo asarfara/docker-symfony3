@@ -67,3 +67,11 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+parameters:
+    # database details
+    database_host:     mysql
+    database_port:     3306
+    database_name:     dockersymfony
+    database_user:     root
+    database_password: ''
