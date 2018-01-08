@@ -32,4 +32,3 @@ env:
   - AWS_DEFAULT_REGION: ap-southeast-2
   - CLUSTER: docker-test-symfony
   - SERVICE: docker-symfony-test
-  - SYMFONY_ENV: prod
