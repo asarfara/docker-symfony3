@@ -14,21 +14,21 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $query = "select * from Persons";
-//
-//        $statement = $em->getConnection()->prepare($query);
-//
-//        $statement->execute();
-//
-//        $resultDatabase1 = $statement->fetchAll();
-//
-//        print_r($resultDatabase1); die();
+        $em = $this->getDoctrine()->getManager();
+
+        $query = "select * from Persons";
+
+        $statement = $em->getConnection()->prepare($query);
+
+        $statement->execute();
+
+        $resultDatabase1 = $statement->fetchAll();
+
+        print_r($resultDatabase1); die();
 
         // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
+//        return $this->render('default/index.html.twig', [
+//            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
+//        ]);
     }
 }
