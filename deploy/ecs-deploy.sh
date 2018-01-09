@@ -116,6 +116,7 @@ function waitForGreenDeployment {
       # Exit the loop.
       i=$TIMEOUT
     else
+      echo "Waiting for the cluster to stabilise itself with minimum number of tasks running."
       sleep $every
       i=$(( $i + $every ))
     fi

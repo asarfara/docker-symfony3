@@ -27,7 +27,7 @@ jobs:
       - export SYMFONY_ENV=prod
       - composer install -o --no-interaction --no-dev -d symfony
       - ./deploy/docker_push.sh
-      - ./deploy/ecs_push.sh
+      - ./aws/ecs-deploy.sh
 
 env:
   global:
