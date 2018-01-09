@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-TIMEOUT=90
+TIMEOUT=600
 AWS_CLI=$(which aws)
 AWS_ECS="$AWS_CLI --output json ecs"
 
@@ -111,7 +111,6 @@ function waitForGreenDeployment {
     NUM_DEPLOYMENTS=$($AWS_ECS describe-services --services $SERVICE --cluster $CLUSTER | jq "[.services[].deployments[]] | length")
 
     # Wait to see if more than 1 deployment stays running
-    # If the wait time has passed, we need to roll back
     if [ $NUM_DEPLOYMENTS -eq 1 ]; then
       echo "Service deployment successful."
       # Exit the loop.
@@ -140,8 +139,6 @@ updateService
 
 # Validate if running count has stabilized.
 waitForGreenDeployment
-
-# Todo: Make task definition a cli argument.
 
 
 
